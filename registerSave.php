@@ -2,7 +2,7 @@
 include_once('connect_db.php');
 
 $email = $_POST["email"];
-$pass_word = $_POST["pass_word"];
+$pass_word = md5($_POST["pass_word"]);
 $address1 = $_POST["address1"];
 $address2 = $_POST["address2"];
 $city = $_POST["city"];

@@ -26,10 +26,81 @@ include_once('connect_db.php');
         document.forms["myForm"]["pass_word"].focus();
         return false;
         }
+        let address1 = document.forms["myForm"]["address1"].value;
+        if (address1 == "") {
+        alert("คุณยังไม่ได้กรอกที่อยู่ 1");
+        document.forms["myForm"]["address1"].focus();
+        return false;
+        }
+        let address2 = document.forms["myForm"]["address2"].value;
+        if (address2 == "") {
+        alert("คุณยังไม่ได้กรอกที่อยู่ 2");
+        document.forms["myForm"]["address2"].focus();
+        return false;
+        }
+        let city = document.forms["myForm"]["city"].value;
+        if (city == "") {
+        alert("คุณยังไม่ได้กรอกเมือง");
+        document.forms["myForm"]["city"].focus();
+        return false;
+        }
+        let state = document.forms["myForm"]["state"].value;
+        if (state == "") {
+        alert("คุณยังไม่ได้กรอกจังหวัด");
+        document.forms["myForm"]["state"].focus();
+        return false;
+        }
+        let zip = document.forms["myForm"]["zip"].value;
+        if (zip == "") {
+        alert("คุณยังไม่ได้กรอกรหัสไปรษณีย์");
+        document.forms["myForm"]["zip"].focus();
+        return false;
+        }
     }
     </script>
   </head>
   <body>
+    
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+
+
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <h1>Hello, world!</h1>
     <form action="registerSave.php" name="myForm" class="row g-3" method="post" onsubmit="return validateForm()">
@@ -56,7 +127,7 @@ include_once('connect_db.php');
         <div class="col-md-4">
           <label for="inputState" class="form-label">State</label>
           <select id="inputState" class="form-select" name="state">
-            <option selected>เลือกจังหวัด...</option>
+            <option selected value="">เลือกจังหวัด...</option>
             <option value="เลย">เลย</option>
             <option value="อุดรธานี">อุดรธานี</option>
             <option value="ขอนแก่น">ขอนแก่น</option>
@@ -68,8 +139,7 @@ include_once('connect_db.php');
         </div>
         <div class="col-12">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="check_me" value="0" id="gridCheck" checked hidden>
-            <input class="form-check-input" type="checkbox" name="check_me" value="1" id="gridCheck">
+            <input class="form-check-input" type="checkbox" name="check_me" value="" id="gridCheck">
             <label class="form-check-label" for="gridCheck">
               Check me out
             </label>
@@ -122,7 +192,6 @@ include_once('connect_db.php');
         </tbody>
       </table>
     </div>
-    
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

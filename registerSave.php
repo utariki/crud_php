@@ -10,12 +10,21 @@ $state = $_POST["state"];
 $zip = $_POST["zip"];
 $check_me = $_POST["check_me"];
 
+$new_check = "";
+
+    if($check_me == ""){
+        $new_check = "0";
+    }else{
+        $new_check = "1";
+    }
 
 if(isset($_POST["save"])){
 
+    
+
 $sql = "INSERT INTO `register` (`id`, `email`, `pass_word`, `address1`, `address2`, `city`, 
 `state`, `zip`, `check_me`, `date_time`) VALUES 
-(NULL, '$email', '$pass_word', '$address1', '$address2', '$city', '$state', '$zip', '$check_me', 
+(NULL, '$email', '$pass_word', '$address1', '$address2', '$city', '$state', '$zip', '$new_check', 
 current_timestamp());";
 
 
@@ -36,7 +45,7 @@ current_timestamp());";
                                     `city` = '$city', 
                                     `state` = '$state', 
                                     `zip` = '$zip', 
-                                    `check_me` = '$check_me' 
+                                    `check_me` = '$new_check' 
                                 WHERE `register`.`id` = $id;";
     mysqli_query($conn, $sql);
     echo '<script language="JavaScript">';

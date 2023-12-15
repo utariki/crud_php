@@ -10,7 +10,7 @@ include_once('connect_db.php');
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>แก้ไขข้อมูลส่วนตัว</title>
     <script>
     function validateForm() {
@@ -30,6 +30,46 @@ include_once('connect_db.php');
     </script>
   </head>
   <body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+
+
+            </div>
+        </div>
+    </nav>
     <div class="container">
       <h1>แก้ไขข้อมูลส่วนตัว</h1>
       <?php
@@ -37,6 +77,8 @@ include_once('connect_db.php');
         $sql = "SELECT * FROM `register` WHERE id = $id";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
+
+        $check_me = $row["check_me"];
       ?>
     <form action="registerSave.php?id=<?php echo $row['id']; ?>" name="myForm" class="row g-3" method="post" onsubmit="return validateForm()">
         <div class="col-md-6">
@@ -62,7 +104,7 @@ include_once('connect_db.php');
         <div class="col-md-4">
           <label for="inputState" class="form-label">State</label>
           <select id="inputState" class="form-select" name="state">
-            <option selected>เลือกจังหวัด...</option>
+            <option value="<?php echo $row['state']; ?>" hidden><?php echo $row['state']; ?></option>
             <option value="เลย">เลย</option>
             <option value="อุดรธานี">อุดรธานี</option>
             <option value="ขอนแก่น">ขอนแก่น</option>
@@ -74,8 +116,15 @@ include_once('connect_db.php');
         </div>
         <div class="col-12">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="check_me" value="<?php echo $row['check_me']; ?>" id="gridCheck">
-            <label class="form-check-label" for="gridCheck">
+            <?php
+              if($check_me == "0"){
+                print'<input class="form-check-input" type="checkbox" name="check_me" value="" id="gridCheck">';
+                print'<label class="form-check-label" for="gridCheck">';
+              }else{
+                print'<input class="form-check-input" type="checkbox" name="check_me" value="" id="gridCheck" checked>';
+                print'<label class="form-check-label" for="gridCheck">';
+              }
+            ?>   
               Check me out
             </label>
           </div>
